@@ -1,6 +1,6 @@
 character = Character.create([
     {
-        class: "Netrunner",
+        role: "Netrunner",
         name: "RedEyes",
         background: "Street Rat, born in Upper Eastside nightcity, one hit of the net and she began her life as a hacker, surfing the world of digital warfare",
         motivation: "Lost her mother to a Corpo Mogul, everything is focused on revenge, no matter how sweet",
@@ -11,7 +11,7 @@ character = Character.create([
         personality: "Picky, fussy and nervous",
     },
     {
-        class: "Nomad",
+        role: "Nomad",
         name: "Max",
         background: "In a Nomad Pack moving from town to town, Family status in danger, he risks losing everything; family exiled or otherwise driven from their original home",
         motivation: "People are untrustworthy. Don't depend on anyone",
@@ -22,7 +22,7 @@ character = Character.create([
         personality: "Rebellious, antisocial, violent",
     },
     {
-        class: "Media",
+        role: "Media",
         name: "Clark Cooper",
         background: "Corporate Executives, both parents are living but work hard under the pressure of a megacorp",
         motivation: "Expose the truth",
