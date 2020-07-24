@@ -1,0 +1,5 @@
+const LOAD_CHARACTERS = "LOAD_CHARACTERS"
+
+export {
+    LOAD_CHARACTERS
+}
