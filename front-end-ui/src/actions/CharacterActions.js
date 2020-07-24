@@ -1,4 +1,4 @@
-import { LOAD_CHARACTERS } from './actionTypes/index'
+import { LOAD_CHARACTERS } from '../actionTypes/index'
 
 const ROOT_URL = 'http://localhost:3001'
 

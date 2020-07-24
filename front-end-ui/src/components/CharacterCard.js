@@ -14,5 +14,5 @@ export default function CharacterCard({ character }) {
             <p>{character.personality}</p>
 
         </div>
-    )
+    );
 }

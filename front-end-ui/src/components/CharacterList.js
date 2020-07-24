@@ -1,13 +1,13 @@
 import React from 'react';
-import {CharacterCard} from './CharacterCard';
+import CharacterCard from './CharacterCard';
 
 
-export default function CharacterList({ character }) {
+export default function CharacterList({ characters }) {
   const emptyMessage = <p>No characters created</p>;
 
-  const CharacterList = (
+  const charactersList = (
     <div className="ui four cards">
-      <h1>Characters will render here</h1>
+      <CharacterCard character={characters} />
     </div>
   );
 

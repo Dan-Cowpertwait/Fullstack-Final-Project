@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCharacters } from './actions';
+import { fetchCharacters } from '../actions/CharacterActions';
 import { Component } from 'react';
-import { CharacterList} from '../components/CharacterList'
+import CharacterList from '../components/CharacterList'
 
 
 class CharacterContainer extends Component {
