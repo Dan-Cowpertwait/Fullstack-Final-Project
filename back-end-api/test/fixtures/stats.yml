@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  intelligence: 1
+  reflex: 1
+  dexterity: 1
+  technology: 1
+  cool: 1
+  willpower: 1
+  luck: 1
+  movement: 1
+  body: 1
+  empathy: 1
+  character: one
+
+two:
+  intelligence: 1
+  reflex: 1
+  dexterity: 1
+  technology: 1
+  cool: 1
+  willpower: 1
+  luck: 1
+  movement: 1
+  body: 1
+  empathy: 1
+  character: two
