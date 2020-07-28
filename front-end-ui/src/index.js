@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import thunk from 'redux-thunk'
+import './index.css';
+
+//component imports
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, compose } from "redux";
-import charactersReducer from './rootReducer'
+
+//REDUCER IMPORT
+import charactersReducer from './reducers/characters'
 
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

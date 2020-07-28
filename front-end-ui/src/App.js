@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Home from './components/HomePage'
-import CharactersContainer from './Containers/CharactersContainer'
+import HomePage from './components/HomePage'
+import CharactersContainer from './containers/CharactersContainer'
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
           </Route>
 
           <Route path="/">
-            <Home/>
+            <HomePage/>
           </Route>
 
         </Switch>
