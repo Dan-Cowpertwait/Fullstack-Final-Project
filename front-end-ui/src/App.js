@@ -1,22 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Home from './components/HomePage'
+import CharactersContainer from './Containers/CharactersContainer'
 
-import CharacterContainer from './containers/CharacterContainer';
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Switch>
+          
+          <Route path="/characters">
+            <CharactersContainer/>
+          </Route>
 
+          <Route path="/">
+            <Home/>
+          </Route>
 
-class App extends Component() {
-  render() {
-    return (
-      <Router>
-        <div className="App">
-          <Switch>
-              <Route exact path='/characters' component={CharacterContainer} />         
-          </Switch>
-        </div>
-      </Router>
-    );
-  }
+        </Switch>
+      </div>
+    </Router>
+  );
 }
 
 export default App;
