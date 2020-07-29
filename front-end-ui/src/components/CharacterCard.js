@@ -7,14 +7,14 @@ export default function CharacterCard({ character }) {
     <div>
         {character.name}
     </div>
-        <p>{character.role}</p>
-        <p>{character.background}</p>
-        <p>{character.motivation}</p>
-        <p>{character.goals}</p>
-        <p>{character.friends}</p>
-        <p>{character.enemies}</p>
-        <p>{character.romance}</p>
-        <p>{character.personality}</p>
+        <p>ROLE - {character.role}</p>
+        <p>BACKGROUND - {character.background}</p>
+        <p>MOTIVATION - {character.motivation}</p>
+        <p>GOALS - {character.goals}</p>
+        <p>FRIENDS - {character.friends}</p>
+        <p>ENEMIES - {character.enemies}</p>
+        <p>ROMANCE - {character.romance}</p>
+        <p>PERSONALITY - {character.personality}</p>
 
         <br></br>
     </div>

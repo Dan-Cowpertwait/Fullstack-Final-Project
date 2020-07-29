@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import HomePage from './components/HomePage'
 import CharactersContainer from './containers/CharactersContainer'
+import CharacterFormContainer from './containers/CharacterFormContainer'
 
 function App() {
   return (
@@ -12,6 +13,10 @@ function App() {
           
           <Route path="/characters">
             <CharactersContainer/>
+          </Route>
+
+          <Route path="/character/new">
+            <CharacterFormContainer/>
           </Route>
 
           <Route path="/">

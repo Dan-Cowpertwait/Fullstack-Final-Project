@@ -11,11 +11,13 @@ import { createStore, applyMiddleware, compose } from "redux";
 //REDUCER IMPORT
 import charactersReducer from './reducers/characters'
 
-
+//redux consts
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(charactersReducer, composeEnhancer(applyMiddleware(thunk)));
 
+
+//Application
 ReactDOM.render(
 <Provider store={store}>
     <App />

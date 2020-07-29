@@ -7,7 +7,7 @@ export default class HomePage extends React.Component{
             <div>
                 <h1>Home Header</h1>
                 <p>Character info</p>
-                <Link to={`/characters`}>Click Here to See Characters</Link>
+                <Link to={`/characters`}>All Characters</Link>
             </div>
         )
     }

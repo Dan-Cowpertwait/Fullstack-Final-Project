@@ -1,9 +1,9 @@
-import { LOAD_CHARACTERS } from '../actions/actiontypes'
+import { LOAD_CHARACTERS, SAVE_CHARACTER } from '../actions/actiontypes'
 
 const initUserState = {
     fetching: false,
     fetched: false,
-    characters: [1, 2, 3, 4],
+    characters: [1, 2],
     error: null
 };
 
@@ -19,6 +19,15 @@ export default function charactersReducer(state = [], action) {
           characters: action.characters,
           error: null
         } 
+
+        case SAVE_CHARACTER:
+          console.log(action.character)
+          return {
+            fetched: true,
+            ...state,
+            character: action.character,
+            error: null
+          }
 
   
       default:
