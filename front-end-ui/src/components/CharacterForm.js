@@ -38,12 +38,12 @@ class CharacterForm extends React.Component {
     if (this.state.personality === '') errors.personality = "Input Required";
 
     this.setState({ errors });
-    const isValid = Object.keys(errors).length === 0;
+    const isValid = this.state.errors.length === 0;
 
     if (isValid) {
       const { role, name, background, motivation, goals, friends, enemies, romance, personality } = this.state;
       const id = this.state.id;
-      console.log(id)
+      // console.log(id)
       this.setState({ fetching: true });
       this.props.saveCharacter({ id, role, name, background, motivation, goals, friends, enemies, romance, personality})
     }
@@ -80,108 +80,71 @@ class CharacterForm extends React.Component {
         <div
           className='field'>
           <label htmlFor="role">Role</label>
-          <input name="role" value={this.state.role} onChange={this.handleChange} type="text" id="role"/>
-          
+            <select name="role" value={this.state.role} onChange={this.handleChange} type="text" id="role">
+            <option value="Corpo">Corpo</option>
+            <option value="Fixer">Fixer</option>
+            <option value="Lawman">Lawman</option>
+            <option value="Media">Media</option>
+            <option value="Netrunner">Netrunner</option>
+            <option value="Nomad">Nomad</option>
+            <option value="Rockerboy">Rockerboy</option>
+            <option value="Tech">Tech</option>
+            <option value="Solo">Solo</option>
+          </select>
+
         </div>
 
         <div className='field'>
           
           <label htmlFor="name">Name</label>
-          <input
-            name="name"
-            value={this.state.name}
-            onChange={this.handleChange}
-            type="text"
-            id="name"
-          />
+          <input name="name" value={this.state.name} onChange={this.handleChange} type="text" id="name" />
           
         </div>
 
         <div className='field'>
           
           <label htmlFor="background">Background</label>
-          <input
-            name="background"
-            value={this.state.background}
-            onChange={this.handleChange}
-            type="text"
-            id="background"
-          />
+          <input name="background" value={this.state.background} onChange={this.handleChange} type="text" id="background" />
           
         </div>
 
         <div className='field' >
           
           <label htmlFor="motivation">Motivation</label>
-          <input
-            name="motivation"
-            value={this.state.motivation}
-            onChange={this.handleChange}
-            type="text"
-            id="motivation"
-          />
+          <input name="motivation" value={this.state.motivation} onChange={this.handleChange} type="text" id="motivation" />
           
         </div>
 
         <div className='field' >
           
           <label htmlFor="goals">Goals</label>
-          <input
-            name="goals"
-            value={this.state.goals}
-            onChange={this.handleChange}
-            type="text"
-            id="goals"
-          />
+          <input name="goals" value={this.state.goals} onChange={this.handleChange} type="text" id="goals" />
           
         </div>
 
         <div className='field' >
           
           <label htmlFor="friends">Friends</label>
-          <input
-            name="friends"
-            value={this.state.friends}
-            onChange={this.handleChange}
-            type="text"
-            id="friends"
-          />
+          <input name="friends" value={this.state.friends} onChange={this.handleChange} type="text" id="friends" />
           
         </div>
 
         <div className='field'>
           
           <label htmlFor="enemies">Enemies</label>
-          <input
-            name="enemies"
-            value={this.state.enemies}
-            onChange={this.handleChange}
-            type="text"
-            id="enemies"
-          />
+          <input name="enemies" value={this.state.enemies} onChange={this.handleChange} type="text" id="enemies" />
         </div>
 
         <div className='field'>
           
           <label htmlFor="romance">Romance</label>
-          <input
-            name="romance"
-            value={this.state.romance}
-            onChange={this.handleChange}
-            type="text"
-            id="romance"
-          />
+          <input name="romance" value={this.state.romance} onChange={this.handleChange} type="text" id="romance" />
         </div>
 
         <div className="field">
           
           <label htmlFor="personality">Personality</label>
-          <input
-            name="personality"
-            value={this.state.personality}
-            onChange={this.handleChange}
-            type="text"
-            id="personality"
+          <input name="personality" value={this.state.personality} onChange={this.handleChange} type="text" id="personality"
           />
           <span>{this.state.errors.personality}</span>
         </div>

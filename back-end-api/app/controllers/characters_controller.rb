@@ -46,6 +46,6 @@ class CharactersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def character_params
-      params.require(:character).permit(:class, :name, :background, :motivation, :goals, :friends, :enemies, :romance, :personality, :portrait)
+      params.require(:character).permit(:role, :name, :background, :motivation, :goals, :friends, :enemies, :romance, :personality, :portrait)
     end
 end

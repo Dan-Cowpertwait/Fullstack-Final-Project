@@ -1,4 +1,4 @@
-import { LOAD_CHARACTERS, SAVE_CHARACTER, LOAD_CHARACTER, DELETE_CHARACTER } from '../actions/actiontypes'
+import { LOAD_CHARACTERS, SAVE_CHARACTER, LOAD_CHARACTER, DELETE_CHARACTER, UPDATE_CHARACTER } from '../actions/actiontypes'
 
 
 export function characterFound(character) {
@@ -28,6 +28,13 @@ export function characterDeleted(id) {
     type: DELETE_CHARACTER,
     id
   };
+}
+
+export function updateCharacterData(character){
+  return {
+    type: UPDATE_CHARACTER,
+    character
+  }
 }
 
 
@@ -72,6 +79,7 @@ export function saveCharacter(data) {
 }
 
 export function updateCharacter(id, data) {
+  return dispatch => {
     console.log(data)
     return fetch(`http://localhost:3001/characters/${id}`, {
       method: 'PATCH',
@@ -80,6 +88,11 @@ export function updateCharacter(id, data) {
         'Content-type': 'application/json'
       }
     })
+    .then(json => {
+      const character = json
+      dispatch(updateCharacterData(character))
+    })
+  }
 }
 
 export function deleteCharacter(id) {
