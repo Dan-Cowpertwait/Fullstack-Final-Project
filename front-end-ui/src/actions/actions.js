@@ -1,15 +1,5 @@
-import { LOAD_CHARACTERS, SAVE_CHARACTER, LOAD_CHARACTER, UPDATE_CHARACTER } from '../actions/actiontypes'
+import { LOAD_CHARACTERS, SAVE_CHARACTER, LOAD_CHARACTER, DELETE_CHARACTER } from '../actions/actiontypes'
 
-
-// function handleResponse(res) {
-//   if (res.ok) {
-//     return res.json();
-//   } else {
-//     let error = new Error(res.statusText);
-//     error.response = res;
-//     throw error;
-//   }
-// }
 
 export function characterFound(character) {
   return {
@@ -33,12 +23,13 @@ export function saveData(character) {
   };
 }
 
-// export function updateData(character){
-//   return {
-//     type: UPDATE_CHARACTER,
-//     character
-//   }
-// }
+export function characterDeleted(id) {
+  return {
+    type: DELETE_CHARACTER,
+    id
+  };
+}
+
 
 export function fetchCharacters() {
     return dispatch => {
@@ -81,7 +72,6 @@ export function saveCharacter(data) {
 }
 
 export function updateCharacter(id, data) {
-  return dispatch => {
     console.log(data)
     return fetch(`http://localhost:3001/characters/${id}`, {
       method: 'PATCH',
@@ -90,7 +80,19 @@ export function updateCharacter(id, data) {
         'Content-type': 'application/json'
       }
     })
-  };
 }
+
+export function deleteCharacter(id) {
+  return dispatch => {
+    return fetch(`http://localhost:3001/characters/${id}`, {
+      method: 'delete',
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
+    .then(dispatch(characterDeleted(id)))
+  }
+}
+
 
 

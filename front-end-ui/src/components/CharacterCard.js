@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function CharacterCard({ character }) {
+export default function CharacterCard({ character, deleteCharacter }) {
   return (
     <div className="card">
     <div>
@@ -18,7 +18,10 @@ export default function CharacterCard({ character }) {
 
         <br></br>
 
+        
+
         <Link to={`/character/${character.id}`} className="ui basic button green">Edit Character</Link>
+        <button className="button" onClick={() => deleteCharacter(character.id)}>DELETE</button>
     </div>
 
   );
