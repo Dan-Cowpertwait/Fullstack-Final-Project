@@ -2,7 +2,7 @@ import React from 'react'
 import CharacterForm from '../components/CharacterForm'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { saveCharacter, fetchCharacter } from '../actions/actions';
+import { saveCharacter, fetchCharacter, updateCharacter } from '../actions/actions';
 
 class CharacterFormContainer extends React.Component{
     state = {
@@ -16,13 +16,16 @@ class CharacterFormContainer extends React.Component{
   };
 
   saveCharacter = ({ id, role, name, background, motivation, goals, friends, enemies, romance, personality}) => {
-    if (id) {
-      return this.props.updateCharacter({ id, role, name, background, motivation, goals, friends, enemies, romance, personality }).then(() => {
+    if (id !== null) {
+      const characterData = {character : { role, name, background, motivation, goals, friends, enemies, romance, personality}}
+      const characterId = this.props.character.id
+      return this.props.updateCharacter(characterId, characterData).then(() => {
         this.setState({ redirect: true });
       });
     } else {
-      return this.props.saveCharacter({  role, name, background, motivation, goals, friends, enemies, romance, personality }).then(() => {
+      return this.props.saveCharacter({ role, name, background, motivation, goals, friends, enemies, romance, personality }).then(() => {
         this.setState({ redirect: true });
+        console.log("Not Working")
       });
     }
   };
@@ -40,17 +43,15 @@ class CharacterFormContainer extends React.Component{
 
 function mapStateToProps(state, props) {
   if (props.match.params.id) {
-    console.log(state.characters.pop)
     return {
       character: state.characters[state.characters.length -1],
     }
   }else{
-    console.log("DIDNT WORK")
   }
 
   return { character: null };
 }
 
-export default connect(mapStateToProps, { saveCharacter, fetchCharacter })(
+export default connect(mapStateToProps, { saveCharacter, fetchCharacter, updateCharacter })(
     CharacterFormContainer
 );

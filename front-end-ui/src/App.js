@@ -15,7 +15,7 @@ function App() {
             <HomePage/>
           </Route>
           
-          <Route path="/characters">
+          <Route exact path="/characters">
             <CharactersContainer/>
           </Route>
 

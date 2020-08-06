@@ -1,17 +1,16 @@
 import React from 'react';
-import classnames from 'classnames';
 
 class CharacterForm extends React.Component {
         state = {
-            role: this.props.character ? console.log(this.props.character) : console.log(this.props.character),
-            name: this.props.character ? this.props.character.name : '',
-            background: this.props.character ? this.props.character.background : '',
-            motivation: this.props.character ? this.props.character.motivation : '',
-            goals: this.props.character ? this.props.character.goals : '',
-            friends: this.props.character ? this.props.character.friends : '',
-            enemies: this.props.character ? this.props.character.enemies : '',
-            romance: this.props.character ? this.props.character.romance : '',
-            personality: this.props.character ? this.props.character.personality : '',
+            role: this.props.character ? this.props.character.role : ' ',
+            name: this.props.character ? this.props.character.name : ' ',
+            background: this.props.character ? this.props.character.background : ' ',
+            motivation: this.props.character ? this.props.character.motivation : ' ',
+            goals: this.props.character ? this.props.character.goals : ' ',
+            friends: this.props.character ? this.props.character.friends : ' ',
+            enemies: this.props.character ? this.props.character.enemies : ' ',
+            romance: this.props.character ? this.props.character.romance : ' ',
+            personality: this.props.character ? this.props.character.personality : ' ',
             id: this.props.character ? this.props.character.id : null,
             fetching: false,
             errors: {}
@@ -19,30 +18,8 @@ class CharacterForm extends React.Component {
 
 //set form values if character is already loaded for update.
 
-
-  componentWillReceiveProps = nextProps => {
-    this.setState({
-      id: nextProps.character.id,
-      role: nextProps.character.role,
-      name: nextProps.character.name,
-      background: nextProps.character.background,
-      motivation: nextProps.character.motivation,
-      goals: nextProps.character.goals,
-      friends: nextProps.character.friends,
-      enemies: nextProps.character.enemies,
-      romance: nextProps.character.romance,
-      personality: nextProps.character.personality
-    });
-  };
-
   handleChange = e => {
-    if (!!this.state.errors[e.target.name]) {
-      let errors = Object.assign({}, this.state.errors);
-      delete errors[e.target.name];
-      this.setState({ [e.target.name]: e.target.value, errors });
-    } else {
       this.setState({ [e.target.name]: e.target.value });
-    }
   };
 
   handleSubmit = e => {
@@ -50,58 +27,64 @@ class CharacterForm extends React.Component {
 
     // validation
     let errors = {};
-    if (this.state.role === '') errors.role = "Can't be empty";
-    if (this.state.name === '') errors.name = "Can't be empty";
-    if (this.state.background === '') errors.background = "Can't be empty";
-    if (this.state.motivation === '') errors.motivation = "Can't be empty";
-    if (this.state.goals === '') errors.goals = "Can't be empty";
-    if (this.state.friends === '') errors.friends = "Can't be empty";
-    if (this.state.enemies === '') errors.enemies = "Can't be empty";
-    if (this.state.romance === '') errors.romance = "Can't be empty";
-    if (this.state.personality === '') errors.personality = "Can't be empty";
+    if (this.state.role === '') errors.role = "Input Required";
+    if (this.state.name === '') errors.name = "Input Required";
+    if (this.state.background === '') errors.background = "Input Required";
+    if (this.state.motivation === '') errors.motivation = "Input Required";
+    if (this.state.goals === '') errors.goals = "Input Required";
+    if (this.state.friends === '') errors.friends = "Input Required";
+    if (this.state.enemies === '') errors.enemies = "Input Required";
+    if (this.state.romance === '') errors.romance = "Input Required";
+    if (this.state.personality === '') errors.personality = "Input Required";
 
     this.setState({ errors });
     const isValid = Object.keys(errors).length === 0;
 
     if (isValid) {
       const { role, name, background, motivation, goals, friends, enemies, romance, personality } = this.state;
+      const id = this.state.id;
+      console.log(id)
       this.setState({ fetching: true });
-      this.props.saveCharacter({ role, name, background, motivation, goals, friends, enemies, romance, personality})
-        .catch(err =>
-          err
-            .response.json()
-            .then(({ errors }) => this.setState({ errors, fetching: false })));
+      this.props.saveCharacter({ id, role, name, background, motivation, goals, friends, enemies, romance, personality})
     }
   };
 
+  static getDerivedStateFromProps(nextProps, state) {
+    if (nextProps.character !== null){
+      const { id, role, name, background, motivation, goals, friends, enemies, romance, personality } = nextProps.character;
+      if (nextProps.character.id !== state.id) {
+        return {
+          id,
+          role,
+          name,
+          background,
+          motivation,
+          goals,
+          friends,
+          enemies,
+          romance,
+          personality
+        };
+      }
+      // Return null to indicate no change to state.
+      return null;
+    }
+  }
+
   render() {
     const form = (
-      <form
-        className={classnames('ui', 'form', { fetching: this.state.fetching })}
-        onSubmit={this.handleSubmit}
-      >
+      <form className='form'onSubmit={this.handleSubmit}>
+
         <h1>New character</h1>
 
-        {!!this.state.errors.global &&
-          <div className="ui negative message">
-            <p>{this.state.errors.global}</p>
-          </div>}
-
         <div
-          className={classnames('field', { error: !!this.state.errors.role })}
-        >
+          className='field'>
           <label htmlFor="role">Role</label>
-          <input
-            name="role"
-            value={this.state.role}
-            onChange={this.handleChange}
-            type="text"
-            id="role"
-          />
-          <span>{this.state.errors.role}</span>
+          <input name="role" value={this.state.role} onChange={this.handleChange} type="text" id="role"/>
+          
         </div>
 
-        <div className={classnames('field', { error: !!this.state.errors.name })} >
+        <div className='field'>
           
           <label htmlFor="name">Name</label>
           <input
@@ -111,10 +94,10 @@ class CharacterForm extends React.Component {
             type="text"
             id="name"
           />
-          <span>{this.state.errors.name}</span>
+          
         </div>
 
-        <div className={classnames('field', { error: !!this.state.errors.background })} >
+        <div className='field'>
           
           <label htmlFor="background">Background</label>
           <input
@@ -124,10 +107,10 @@ class CharacterForm extends React.Component {
             type="text"
             id="background"
           />
-          <span>{this.state.errors.background}</span>
+          
         </div>
 
-        <div className={classnames('field', { error: !!this.state.errors.motivation })} >
+        <div className='field' >
           
           <label htmlFor="motivation">Motivation</label>
           <input
@@ -137,10 +120,10 @@ class CharacterForm extends React.Component {
             type="text"
             id="motivation"
           />
-          <span>{this.state.errors.motivation}</span>
+          
         </div>
 
-        <div className={classnames('field', { error: !!this.state.errors.goals })} >
+        <div className='field' >
           
           <label htmlFor="goals">Goals</label>
           <input
@@ -150,10 +133,10 @@ class CharacterForm extends React.Component {
             type="text"
             id="goals"
           />
-          <span>{this.state.errors.goals}</span>
+          
         </div>
 
-        <div className={classnames('field', { error: !!this.state.errors.friends })} >
+        <div className='field' >
           
           <label htmlFor="friends">Friends</label>
           <input
@@ -163,10 +146,10 @@ class CharacterForm extends React.Component {
             type="text"
             id="friends"
           />
-          <span>{this.state.errors.friends}</span>
+          
         </div>
 
-        <div className={classnames('field', { error: !!this.state.errors.enemies })} >
+        <div className='field'>
           
           <label htmlFor="enemies">Enemies</label>
           <input
@@ -176,10 +159,9 @@ class CharacterForm extends React.Component {
             type="text"
             id="enemies"
           />
-          <span>{this.state.errors.enemies}</span>
         </div>
 
-        <div className={classnames('field', { error: !!this.state.errors.romance })} >
+        <div className='field'>
           
           <label htmlFor="romance">Romance</label>
           <input
@@ -189,10 +171,9 @@ class CharacterForm extends React.Component {
             type="text"
             id="romance"
           />
-          <span>{this.state.errors.romance}</span>
         </div>
 
-        <div className={classnames('field', { error: !!this.state.errors.personality })} >
+        <div className="field">
           
           <label htmlFor="personality">Personality</label>
           <input

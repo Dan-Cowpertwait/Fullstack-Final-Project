@@ -1,4 +1,4 @@
-import { LOAD_CHARACTERS, SAVE_CHARACTER, LOAD_CHARACTER } from '../actions/actiontypes'
+import { LOAD_CHARACTERS, SAVE_CHARACTER, LOAD_CHARACTER, UPDATE_CHARACTER } from '../actions/actiontypes'
 
 
 // function handleResponse(res) {
@@ -32,6 +32,13 @@ export function saveData(character) {
     character
   };
 }
+
+// export function updateData(character){
+//   return {
+//     type: UPDATE_CHARACTER,
+//     character
+//   }
+// }
 
 export function fetchCharacters() {
     return dispatch => {
@@ -70,6 +77,19 @@ export function saveCharacter(data) {
         const character = json
         dispatch(saveData(character))
       })
+  };
+}
+
+export function updateCharacter(id, data) {
+  return dispatch => {
+    console.log(data)
+    return fetch(`http://localhost:3001/characters/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-type': 'application/json'
+      }
+    })
   };
 }
 

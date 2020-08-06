@@ -7,7 +7,7 @@ export default function CharacterList({ characters }) {
   const characterList = (
     <div className="container">
       {characters.map(character => (
-        <CharacterCard character={character} key={character.id}/>
+        <CharacterCard key={character.id} character={character}/>
       ))}
     </div>
   );
