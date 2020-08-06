@@ -1,14 +1,21 @@
-import { LOAD_CHARACTERS, SAVE_CHARACTER } from '../actions/actiontypes'
+import { LOAD_CHARACTERS, SAVE_CHARACTER, LOAD_CHARACTER } from '../actions/actiontypes'
 
 
-function handleResponse(res) {
-  if (res.ok) {
-    return res.json();
-  } else {
-    let error = new Error(res.statusText);
-    error.response = res;
-    throw error;
-  }
+// function handleResponse(res) {
+//   if (res.ok) {
+//     return res.json();
+//   } else {
+//     let error = new Error(res.statusText);
+//     error.response = res;
+//     throw error;
+//   }
+// }
+
+export function characterFound(character) {
+  return {
+    type: LOAD_CHARACTER,
+    character
+  };
 }
 
 export function loadCharacters(characters) {
@@ -19,7 +26,7 @@ export function loadCharacters(characters) {
 }
 
 
-export function sendCharacter(character) {
+export function saveData(character) {
   return {
     type: SAVE_CHARACTER,
     character
@@ -38,6 +45,18 @@ export function fetchCharacters() {
     };
   }
 
+export function fetchCharacter(id) {
+    return dispatch => {
+      fetch(`http://localhost:3001/characters/${id}`)
+        .then(res => res.json())
+        .then(json => {
+            const character = json
+            // console.log(characters)
+            dispatch(characterFound(character))
+          })
+    };
+  }
+
 export function saveCharacter(data) {
   return dispatch => {
     return fetch('http://localhost:3001/characters', {
@@ -47,10 +66,9 @@ export function saveCharacter(data) {
         'Content-type': 'application/json'
       }
     })
-      .then(handleResponse)
       .then(json => {
         const character = json
-        dispatch(sendCharacter(character))
+        dispatch(saveData(character))
       })
   };
 }

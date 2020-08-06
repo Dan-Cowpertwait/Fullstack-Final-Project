@@ -1,13 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { saveCharacter } from '../actions/actions'
 import classnames from 'classnames';
 
 class CharacterForm extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            role: this.props.character ? this.props.character.role : '',
+        state = {
+            role: this.props.character ? console.log(this.props.character) : console.log(this.props.character),
             name: this.props.character ? this.props.character.name : '',
             background: this.props.character ? this.props.character.background : '',
             motivation: this.props.character ? this.props.character.motivation : '',
@@ -16,10 +12,11 @@ class CharacterForm extends React.Component {
             enemies: this.props.character ? this.props.character.enemies : '',
             romance: this.props.character ? this.props.character.romance : '',
             personality: this.props.character ? this.props.character.personality : '',
+            id: this.props.character ? this.props.character.id : null,
             fetching: false,
             errors: {}
         };
-    }
+
 //set form values if character is already loaded for update.
 
 
@@ -221,10 +218,5 @@ class CharacterForm extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return{
-        saveCharacter: (data) => dispatch(saveCharacter(data))
-    }
-}
 
-export default connect(null, mapDispatchToProps)(CharacterForm)
+export default CharacterForm

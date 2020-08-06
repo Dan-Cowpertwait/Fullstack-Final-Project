@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function CharacterCard({ character }) {
   return (
@@ -17,6 +17,8 @@ export default function CharacterCard({ character }) {
         <p>PERSONALITY - {character.personality}</p>
 
         <br></br>
+
+        <Link to={`/character/${character.id}`} className="ui basic button green">Edit Character</Link>
     </div>
 
   );
